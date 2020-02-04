@@ -1,0 +1,108 @@
+ 
+<!DOCTYPE html>
+<html>
+<head>
+	 <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1"> 
+	<title>Formulario 5</title>
+	<link rel="stylesheet" href="css/jquery.mobile-1.3.2.min.css" />
+    <link rel="stylesheet" href="css/jquery.jquery.mobile.structure-1.4.5.min.css" />
+    <link rel="stylesheet" href="css/jquery.mobile.theme-1.4.5.min.css" />
+    <script src="css/jquery-1.7.2.min.js"></script>
+    <script src="css/jquery.mobile-1.1.0.min.js"></script>
+
+    <link rel="stylesheet" href="css/jquery.mobile-1.3.2.min.css" />
+<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
+<link href="style.css" rel="stylesheet" type="text/css">
+
+<script type="text/javascript" src="jquery-1.9.1.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+<style type="text/css">
+	body{
+		background: black;
+		color: white;
+	}
+</style>
+</head>
+<body>
+      <div id="formulario1" data-role="page" data-theme="a">
+	<div class="jumbotron text-center" style="background: gray;">
+		<h1  style="color: white;">Formulario con Firebase</h1>
+	</div>
+
+            <div data-role="content">
+<form  data-ajax="false">
+				<label for="usuario"><h4>Correo</h4></label>
+				<input type="text" id="correo" style="color: white;">
+
+				<label for="usuario"><h4>Contraseña</h4></label>
+				<input type="email" id="contra" style="color: white;">
+
+				<button type="button" class="btn btn-danger form-control" id="guardar" data-theme="e">Guardar</button>
+				<br>
+				<button type="button" class="btn btn-danger form-control" id="verificar" data-theme="c">ingresar</button> 
+</div>
+</form></div>
+	<script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+	<script type="text/javascript" src="js/bootstrap.min.js"></script>
+
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-app.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-analytics.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-auth.js"></script>
+
+<script>
+  // Your web app's Firebase configuration
+ var firebaseConfig = {
+    apiKey: "AIzaSyCIE8Ar0bAoJZH7guXanmC7ua0aEqTpNkM",
+    authDomain: "nuevoaut-9e85f.firebaseapp.com",
+    databaseURL: "https://nuevoaut-9e85f.firebaseio.com",
+    projectId: "nuevoaut-9e85f",
+    storageBucket: "nuevoaut-9e85f.appspot.com",
+    messagingSenderId: "881247853819",
+    appId: "1:881247853819:web:9475ae27d6756c604f245e",
+    measurementId: "G-SB1RM27TE3"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+ // firebase.analytics();
+
+$("#guardar").click(function(){
+
+  var nom= document.getElementById("correo").value;
+  var em=document.getElementById("contra").value;
+
+ firebase.auth().createUserWithEmailAndPassword(nom,em).catch(function(error) {
+  var errorCode = error.code;
+  var errorMessage = error.message;
+  console.log(errorCode);
+  console.log(errorMessage);
+
+
+});
+});
+const em = document.getElementById('correo');
+  const passs = document.getElementById('contra');
+  const ver= document.getElementById('verificar');
+ver.addEventListener('click', e => {
+    //Obtener email y pass
+    const email = em.value;
+    const pass = passs.value;
+    const auth = firebase.auth();
+    // Sign in
+    const promise = auth.signInWithEmailAndPassword(email, pass);
+    promise.then(function (user) {
+      location = 'adentro.html';
+    });
+    promise.catch(e => console.log(e.message));   
+
+  });
+
+
+</script>
+
+</body>
